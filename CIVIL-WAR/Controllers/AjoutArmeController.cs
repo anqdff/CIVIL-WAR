@@ -13,7 +13,7 @@ namespace CIVIL_WAR.Controllers
         }
         // POST: AjoutArmeController/Create
         [HttpPost]
-        [Route("Create")]
+        [Route("CreateArme")]
         public IActionResult Create(Arme model)
         {
             this.Context.ArmeModel.Add(model);
@@ -23,7 +23,7 @@ namespace CIVIL_WAR.Controllers
 
         //Get: Get de la liste des armes
         [HttpGet]
-        [Route("Read")]
+        [Route("ReadArme")]
         public async Task<IActionResult> GetGunList()
         {
             var arme = Context.ArmeModel.ToList();
@@ -32,7 +32,7 @@ namespace CIVIL_WAR.Controllers
 
         //Post: Modifier une arme par son son id
        [HttpPost]
-       [Route("Update")]
+       [Route("UpdateArme")]
        public ActionResult EditGun(int ArmeId,String Name)
        {
             Arme armeUpdate = new Arme();
@@ -42,6 +42,17 @@ namespace CIVIL_WAR.Controllers
             Context.Entry(armeUpdate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Context.SaveChanges();
             return Ok(new Reponse { Status = "200", Message = "Arme modifiée" });
+        }
+
+        [HttpPost]
+        [Route("DeleteArme")]
+        public ActionResult DeleteGun(int ArmeId)
+        {
+            Arme armeDelete = new Arme();
+            armeDelete = Context.ArmeModel.Find(ArmeId);
+            Context.ArmeModel.Remove(armeDelete);
+            Context.SaveChanges();
+            return Ok(new Reponse { Status = "200", Message = "Arme supprimée" });
         }
     }
 }
