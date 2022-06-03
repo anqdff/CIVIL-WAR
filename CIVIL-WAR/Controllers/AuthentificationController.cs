@@ -69,7 +69,12 @@ namespace CIVIL_WAR.Controllers
             var userExists = await _userManager.FindByNameAsync(model.Nom);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Reponse { Status = "Error", Message = "User already exists!" });
-
+            InscriptionModel a = new ()
+            {
+                Mail = model.Mail,
+                Nom = model.Nom,
+                Password = Guid.NewGuid().ToString(),
+            };
             IdentityUser user = new()
             {
                 Email = model.Mail,
