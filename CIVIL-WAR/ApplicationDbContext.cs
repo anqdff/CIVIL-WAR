@@ -21,5 +21,11 @@ namespace CIVIL_WAR
         public DbSet<InscriptionModel> InscriptionModels { get; set; }
         public DbSet<Arme> ArmeModel { get; set; }
         public DbSet<Accessoire> AccessoireModel { get; set; }
+        public DbSet<Panier> PaniersModel { get; set; }
+
+        //commande pour ajouter une migration 
+        //add-migration Initial-commit-Application -Context ApplicationDbContext -o Migrations/Application
+        //commande pour mettre à jour la base avec la migration récente
+        //update-database -Context ApplicationDbContext 
     }
 }
